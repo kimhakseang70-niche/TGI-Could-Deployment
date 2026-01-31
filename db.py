@@ -29,9 +29,18 @@ LIMIT %s;
 """
 
 def get_conn():
-    if not DB_URL:
-        raise ValueError("NEON_DATABASE_URL is not set. Add it in Colab Secrets or os.environ.")
-    return psycopg2.connect(DB_URL)
+    import os
+    import streamlit as st
+    import psycopg2
+
+    db_url = os.getenv("NEON_DATABASE_URL") or st.secrets.get("NEON_DATABASE_URL")
+
+    if not db_url:
+        raise ValueError("NEON_DATABASE_URL is not set in Streamlit Secrets")
+
+    return psycopg2.connect(db_url)
+
+
 
 def init_db():
     with get_conn() as conn:

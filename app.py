@@ -6,7 +6,10 @@ from db import init_db, insert_submission, fetch_latest
 st.set_page_config(page_title="Form → Postgres", page_icon="🧾", layout="centered")
 
 # Create table once per app start
-init_db()
+if "db_initialized" not in st.session_state:
+    init_db()
+    st.session_state.db_initialized = True
+
 
 st.title("🧾 Form → Neon Postgres")
 st.caption("Submit the form. Data is saved to Postgres and shown below.")
