@@ -1,4 +1,3 @@
-%%writefile app.py
 import re
 import pandas as pd
 import streamlit as st

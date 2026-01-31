@@ -1,4 +1,3 @@
-%%writefile db.py
 import os
 import psycopg2
 import psycopg2.extras
